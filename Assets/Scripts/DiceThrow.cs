@@ -58,6 +58,9 @@ public class DiceThrow : MonoBehaviour
 
         dice1.constraints = RigidbodyConstraints.FreezeAll;
         dice2.constraints = RigidbodyConstraints.FreezeAll;
+
+        dice1Result.text = "Dice 1 : ";
+        dice2Result.text = "Dice 2 : ";
     }
 
     private int GetDiceNumber(Rigidbody dice)
@@ -78,12 +81,15 @@ public class DiceThrow : MonoBehaviour
     private IEnumerator DetectDiceSide(int throwCount)
     {
         yield return new WaitForFixedUpdate();
+        while (dice1.velocity == Vector3.zero || dice1.angularVelocity == Vector3.zero)
+        {
+            yield return null;
+        }
         while (dice1.velocity != Vector3.zero || dice2.velocity != Vector3.zero || dice1.angularVelocity != Vector3.zero ||
             dice2.angularVelocity != Vector3.zero)
         {
             yield return null;
         }
-        Debug.Log(dice1.transform.up);
         dice1Result.text = "Dice 1 : " + GetDiceNumber(dice1).ToString();
         if (throwCount == 2)
         {
