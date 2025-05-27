@@ -8,6 +8,7 @@ public class DiceThrow : MonoBehaviour
     [SerializeField] Rigidbody dice1, dice2;
     [SerializeField] List<Vector3> faceVectors = new();
     [SerializeField] Text dice1Result, dice2Result;
+    [SerializeField] ArmFollow armFollow;
     Vector3 dice1InitPos, dice2InitPos;
     float throwForce = 10;
     Coroutine diceCheck;
@@ -23,7 +24,8 @@ public class DiceThrow : MonoBehaviour
     public void ThrowOneDice()
     {
         dice1.constraints = RigidbodyConstraints.None;
-        dice1.AddForceAtPosition(Vector3.forward * throwForce, new Vector3(Random.Range(-2,2), Random.Range(-2, 2), Random.Range(-2, 2)), ForceMode.Impulse);
+        armFollow.GrabDice();
+        //dice1.AddForceAtPosition(Vector3.forward * throwForce, new Vector3(Random.Range(-2,2), Random.Range(-2, 2), Random.Range(-2, 2)), ForceMode.Impulse);
         if (diceCheck != null)
         {
             StopCoroutine(diceCheck);
