@@ -11,6 +11,7 @@ public class ArmFollow : MonoBehaviour
     Vector3 dropPos;
     float _e1, _e2, _e3, _e4, _e5, _e6, moveSpeed = 3f;
     private Configuration _configuration;
+    bool isXR = false;
 
     private void Awake()
     {
